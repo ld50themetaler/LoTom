@@ -1,47 +1,91 @@
+// LoTom キーボード設定ファイル
+// ZMK（Zephyr Mechanical Keyboards）フレームワークを使用した設定
+
+// 必要なヘッダーファイルをインクルード
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// ポインティングデバイスのスクロール感度を設定（デフォルト値：80）
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 / {
+    // カスタム動作（ビヘイビア）の定義
     behaviors {
-      scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
-          compatible = "zmk,behavior-sensor-rotate";
-          label = "ENCODER_MSC_DOWN_UP";
-          #sensor-binding-cells = <0>;
-          bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-          tap-ms = <20>;
-      };
+        // エンコーダーのスクロール動作を定義：上下回転でマウスホイール操作
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_MSC_DOWN_UP";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            tap-ms = <20>;
+        };
 
-      tab_slide: behavior_sensor_rotate_tab_slide {
-          compatible = "zmk,behavior-sensor-rotate";
-          label = "ENCODER_TAB_SLIDE";
-          #sensor-binding-cells = <0>;
-          bindings = <&kp LA(LG(RIGHT_ARROW))>, <&kp LA(LG(LEFT_ARROW))>;
-          tap-ms = <20>;
-      };
+        // エンコーダーのタブスライド動作を定義：左右回転でウィンドウ切り替え（Mac：Cmd+Alt+矢印キー）
+        tab_slide: behavior_sensor_rotate_tab_slide {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_TAB_SLIDE";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp LA(LG(RIGHT_ARROW))>, <&kp LA(LG(LEFT_ARROW))>;
+            tap-ms = <20>;
+        };
+
+        // デフォルトのMod-Tap(&mt)の挙動を上書きし、QMK風の快適な設定に変更します
+        mt: mod_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            
+            // --- ここからがカスタマイズ項目です ---
+
+            // タップとホールドを認識する時間。200msに設定。
+            tapping-term-ms = <200>;
+            
+            // 'tap-preferred'フレーバーを選択。
+            // これにより、高速でキーを連続入力（ローリング）した際に、
+            // ホールド（モディファイア）が誤爆するのを防ぎます。
+            // QMKの`IGNORE_MOD_TAP_INTERRUPT`に近い挙動です。
+            flavor = "tap-preferred"; 
+
+            // (オプション) この時間内の素早い連続タップは、強制的にタップとして扱います。
+            // これにより、スペースキーやエンターキーの連続タップがより確実になります。
+            quick-tap-ms = <150>;
+
+            // --- ここまでがカスタマイズ項目です ---
+
+            bindings = <&kp>, <&kp>;
+        };
     };
 
+    // 日本語入力のオンオフで、ChromeでAltキーが暴発するための対策マクロ
+    macros {
+        macro_alt_grave: macro_alt_grave {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <5>;
+            tap-ms = <5>;
+            bindings =
+                <&macro_press &kp LALT>
+                , <&macro_tap &kp GRAVE>
+                , <&macro_release &kp LALT>
+            ;
+        };
+    };
+
+    // キーマップレイアウト定義
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        layer_0 {
             bindings = <
-&kp ESCAPE                                                                &kp BACKSPACE
-&kp Q      &kp W         &kp E             &kp R           &kp T        &mo 6                      &kp BACKSLASH      &kp Y            &kp U     &kp I        &kp O         &kp P
-&kp A      &kp S         &kp D             &kp F           &kp G        &mo 6                      &kp BACKSLASH      &kp H            &kp J     &kp K        &kp L         &kp MINUS
-&kp Z      &kp X         &kp C             &kp V           &kp B        &kp LEFT_BRACKET           &kp RIGHT_BRACKET  &kp N            &kp M     &kp COMMA    &kp DOT       &lt 2 SLASH
-&kp LCTRL  &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &lt 4 SPACE  &kp LG(SPACE)              &kp ENTER          &lt 3 BACKSPACE                         &lt 2 ESCAPE  &kp RIGHT_BRACKET
-            >;
-
-            sensor-bindings = <
-                &inc_dec_kp RIGHT_ARROW LEFT_ARROW
-                &scroll_up_down
+            &mt LGUI QUOT   &kp COMMA &kp DOT     &kp P          &kp Y                                       &kp F     &kp G        &kp C       &kp R     &kp L
+            &kp A           &kp O     &mt LCTRL E &kp U          &kp I                                       &kp D     &kp H        &mt RCTRL T &kp N     &kp S
+            &mt LSHIFT SEMI &kp Q     &kp J       &kp K          &kp X                                       &kp B     &kp M        &kp W       &kp V     &mt RSHIFT Z
+            &mo 6           &kp LGUI  &kp LALT    &mt LALT BSPC  &mo 2 &mt LSHIFT SPACE      &mt RCTRL ENTER &mo 3     &mt RALT TAB &trans      &trans    &mo 6
             >;
         };
 
+        // レイヤー1: マウス操作レイアウト
         MOUSE {
             bindings = <
 &trans                                                                                                                       &trans
@@ -57,6 +101,7 @@
             >;
         };
 
+        // レイヤー2: スクロール操作レイアウト
         SCROLL {
             bindings = <
 &trans                                                                                          &trans
@@ -72,6 +117,7 @@
             >;
         };
 
+        // レイヤー3: 矢印キーとナビゲーション操作レイアウト
         ARROW {
             bindings = <
 &trans                                                                                                                                                                                 &trans
@@ -87,6 +133,7 @@
             >;
         };
 
+        // レイヤー4: 数字と計算記号レイアウト
         NUM {
             bindings = <
 &trans                                                                                                                                                                  &trans
@@ -102,6 +149,7 @@
             >;
         };
 
+        // レイヤー5: ファンクションキー（F1-F12）レイアウト
         FUNCTION {
             bindings = <
 &trans                                                                                       &trans
@@ -117,6 +165,7 @@
             >;
         };
 
+        // レイヤー6: Bluetooth接続管理レイアウト
         BT {
             bindings = <
 &trans                                                                                                                                      &trans
