@@ -76,13 +76,20 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        layer_0 {
             bindings = <
-&kp ESCAPE                                                                &kp BACKSPACE
-&kp Q      &kp W         &kp E             &kp R           &kp T        &mo 6                      &kp BACKSLASH      &kp Y            &kp U     &kp I        &kp O         &kp P
-&kp A      &kp S         &kp D             &kp F           &kp G        &mo 6                      &kp BACKSLASH      &kp H            &kp J     &kp K        &kp L         &kp MINUS
-&kp Z      &kp X         &kp C             &kp V           &kp B        &kp LEFT_BRACKET           &kp RIGHT_BRACKET  &kp N            &kp M     &kp COMMA    &kp DOT       &lt 2 SLASH
-&kp LCTRL  &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &lt 4 SPACE  &kp LG(SPACE)              &kp ENTER          &lt 3 BACKSPACE                         &lt 2 ESCAPE  &kp RIGHT_BRACKET
+// &kp ESCAPE                                                                                                                                                                          &kp BACKSPACE
+// &kp Q           &kp W         &kp E             &kp R           &kp T        &mo 6                      &kp BACKSLASH      &kp Y            &kp U        &kp I        &kp O         &kp P
+// &kp A           &kp S         &kp D             &kp F           &kp G        &mo 6                      &kp BACKSLASH      &kp H            &kp J        &kp K        &kp L         &kp MINUS
+// &kp Z           &kp X         &kp C             &kp V           &kp B        &kp LEFT_BRACKET           &kp RIGHT_BRACKET  &kp N            &kp M        &kp COMMA    &kp DOT       &lt 2 SLASH
+// &kp LCTRL       &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &lt 4 SPACE  &kp LG(SPACE)              &kp ENTER          &lt 3 BACKSPACE                            &lt 2 ESCAPE  &kp RIGHT_BRACKET
+
+   &mo 5                                                                                                                                                                          &kp BACKSPACE
+   &mt LGUI QUOT   &kp COMMA     &kp DOT           &kp P           &kp Y        &mkp RCLK                  &mkp RCLK          &kp F            &kp G        &kp C        &kp R         &kp L
+   &kp A           &kp O         &mt LCTRL E       &kp U           &kp I        &mkp LCLK                  &mkp LCLK          &kp D            &kp H        &mt RCTRL T  &kp N         &kp S
+   &mt LSHIFT SEMI &kp Q         &kp J             &kp K           &kp X        &mkp MCLK                  &mkp MCLK          &kp B            &kp M        &kp W        &kp V         &mt RSHIFT Z
+   &mo 6           &kp LGUI      &kp LALT          &mt LALT BSPC   &mo 2        &mt LSHIFT SPACE           &mt RCTRL ENTER    &mo 3            &mt RALT TAB                            &mo 6
+
             >;
 
             sensor-bindings = <
@@ -92,13 +99,20 @@
         };
 
         // レイヤー1: マウス操作レイアウト
-        MOUSE {
+        layer_1 {
             bindings = <
-&trans                                                                                                                       &trans
-&trans     &trans        &trans            &trans          &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans     &trans        &trans            &trans          &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans     &trans        &trans            &trans          &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&kp LCTRL  &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &trans  &trans      &trans  &mo 3                       &trans    &trans
+// &trans                                                                                                                                           &trans
+// &trans     &trans        &trans            &trans          &trans      &trans             &trans   &trans      &trans      &trans     &trans     &trans
+// &trans     &trans        &trans            &trans          &trans      &trans             &trans   &trans      &mkp MB1    &mkp MB3   &mkp MB2   &trans
+// &trans     &trans        &trans            &trans          &trans      &trans             &trans   &trans      &trans      &trans     &trans     &trans
+// &kp LCTRL  &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &trans      &trans             &trans   &mo 3                              &trans     &trans
+
+   &trans                                                                                                                                           &trans
+   &trans     &trans        &trans            &trans          &mkp MB5    &trans             &trans   &mkp MB5     &trans     &trans     &trans     &trans
+   &trans     &mkp RCLK     &mo 6             &mkp LCLK       &mkp MCLK   &trans             &mkp MB5 &mkp MCLK    &mkp LCLK  &mo 6      &mkp RCLK  &mkp MB4
+   &trans     &trans        &trans            &trans          &mkp MB4    &trans             &mkp MB5 &mkp MCLK    &mkp LCLK  &mo 6      &mkp RCLK  &mkp MB4
+   &trans     &trans        &trans            &trans          &trans      &trans             &trans   &trans                             &trans     &trans
+
             >;
 
             sensor-bindings = <
@@ -107,14 +121,21 @@
             >;
         };
 
-        // レイヤー2: スクロール操作レイアウト
-        SCROLL {
+        // レイヤー2: ファンクションキー、矢印キーレイアウト、マウスキー
+        layer_2 {
             bindings = <
-&trans                                                                                          &trans
-&kp ESCAPE  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans                  &trans  &trans
+// &trans                                                                                                                                  &trans
+// &kp ESCAPE     &trans  &trans    &trans          &trans  &trans             &trans  &trans            &trans     &trans     &trans      &trans
+// &trans         &trans  &trans    &trans          &trans  &trans             &trans  &trans            &trans     &trans     &trans      &trans
+// &kp F12        &trans  &trans    &trans          &trans  &trans             &trans  &trans            &trans     &trans     &trans      &tran
+// &kp F12        &trans  &trans    &trans          &trans  &trans             &trans  &trans                                  &trans      &trans
+
+   &trans                                                                                                                                  &trans
+   &kp F1         &kp F2  &kp F3    &kp F4          &kp F5  &trans             &trans  &trans            &kp HOME   &kp PG_DN  &kp PG_UP   &kp END
+   &kp F6         &kp F7  &kp F8    &kp F9          &kp F10 &trans             &trans  &macro_alt_grave  &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT    
+   &mt LSHIFT F11 &kp F12 &kp PSCRN &kp PAUSE_BREAK &kp INS &trans             &trans  &mkp MCLK         &mkp LCLK  &mo 6      &mkp RCLK   &trans
+   &trans         &trans  &trans    &mt LALT DEL    &trans  &trans             &trans  &mo 4                                   &trans      &trans       
+
             >;
 
             sensor-bindings = <
@@ -124,13 +145,20 @@
         };
 
         // レイヤー3: 矢印キーとナビゲーション操作レイアウト
-        ARROW {
+        layer_3 {
             bindings = <
-&trans                                                                                                                                                                                 &trans
-&kp GRAVE  &kp LC(LS(TAB))         &kp LG(RIGHT)   &kp NUMBER_9             &kp NUMBER_0       &trans      &trans  &trans  &kp RC(LEFT_ARROW)  &kp UP_ARROW      &kp RC(RIGHT_ARROW)  &kp LG(P)
-&kp TAB    &kp LA(LG(LEFT_ARROW))  &kp LG(LEFT)    &kp LG(LA(RIGHT_ARROW))  &kp LEFT_BRACKET   &trans      &trans  &trans  &kp LEFT_ARROW      &kp DOWN_ARROW    &kp RIGHT_ARROW      &kp LG(K)
-&kp LCMD   &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &kp RIGHT_BRACKET  &trans      &trans  &trans  &trans              &kp LC(UP_ARROW)  &trans               &kp LG(L)
-&trans     &trans                  &trans          &trans                   &trans             &trans      &trans  &trans                                         &trans               &trans
+// &trans                                                                                                                                                                                           &trans
+// &kp GRAVE  &kp LC(LS(TAB))         &kp LG(RIGHT)   &kp NUMBER_9             &kp NUMBER_0        &trans              &trans  &trans    &kp RC(LEFT_ARROW)  &kp UP_ARROW      &kp RC(RIGHT_ARROW)  &kp LG(P)
+// &kp TAB    &kp LA(LG(LEFT_ARROW))  &kp LG(LEFT)    &kp LG(LA(RIGHT_ARROW))  &kp LEFT_BRACKET    &trans              &trans  &trans    &kp LEFT_ARROW      &kp DOWN_ARROW    &kp RIGHT_ARROW      &kp LG(K)
+// &kp LCMD   &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &kp RIGHT_BRACKET   &trans              &trans  &trans    &trans              &kp LC(UP_ARROW)  &trans               &kp LG(L)
+// &trans     &trans                  &trans          &trans                   &trans              &trans              &trans  &trans                                          &trans               &trans
+    
+   &trans                                                                                                                                                                                           &trans
+   &kp N1     &kp N2                  &kp N3          &kp N4                   &kp N5              &trans              &trans  &kp N6    &kp N7              &kp N8            &kp N9               &kp N0
+   &trans     &trans                  &kp ESC         &trans                   &kp TAB             &trans              &trans  &kp LBKT  &kp RBKT            &kp SLASH         &kp EQUAL            &kp MINUS
+   &trans     &trans                  &trans          &trans                   &trans              &trans              &trans  &kp GRAVE &kp BACKSLASH       &trans            &trans               &trans
+   &trans     &trans                  &trans          &trans                   &mo 4               &trans              &trans  &trans                                          &trans               &trans
+
             >;
 
             sensor-bindings = <
@@ -139,14 +167,20 @@
             >;
         };
 
-        // レイヤー4: 数字と計算記号レイアウト
-        NUM {
+        // レイヤー4: Bluetooth接続管理レイアウト
+        layer_4 {
             bindings = <
-&trans                                                                                                                                                                  &trans
-&kp GRAVE                &kp NUMBER_7  &kp NUMBER_8  &kp LG(LS(NUMBER_4))  &kp PLUS      &trans      &trans  &kp BACKSLASH    &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp SEMICOLON
-&kp SLASH                &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6          &kp ASTERISK  &trans      &trans  &kp EXCLAMATION  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp SQT
-&mt LEFT_SHIFT NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3          &kp PERIOD    &trans      &trans  &kp NUMBER_0     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL
-&trans                   &trans        &trans        &trans                &trans        &trans      &trans  &kp LEFT_SHIFT                               &trans        &trans
+// &trans                                                                                                                                                                  &trans
+// &kp GRAVE                &kp NUMBER_7  &kp NUMBER_8  &kp LG(LS(NUMBER_4))  &kp PLUS      &trans      &trans  &kp BACKSLASH    &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp SEMICOLON
+// &kp SLASH                &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6          &kp ASTERISK  &trans      &trans  &kp EXCLAMATION  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp SQT
+// &mt LEFT_SHIFT NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3          &kp PERIOD    &trans      &trans  &kp NUMBER_0     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL
+// &trans                   &trans        &trans        &trans                &trans        &trans      &trans  &kp LEFT_SHIFT                               &trans        &trans
+
+   &trans                                                                                                                          &trans
+   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2 &bt BT_SEL 3  &bt BT_SEL 4 &trans          &trans  &bt BT_CLR  &trans  &trans  &trans  &bt BT_CLR_ALL
+   &trans        &trans        &trans       &trans        &trans       &trans          &trans  &trans      &trans  &trans  &trans  &trans
+   &trans        &trans        &trans       &trans        &trans       &trans          &trans  &trans      &trans  &trans  &trans  &trans
+   &trans        &trans        &trans       &trans        &trans       &trans          &trans  &trans                      &trans  &trans
             >;
 
             sensor-bindings = <
@@ -155,14 +189,20 @@
             >;
         };
 
-        // レイヤー5: ファンクションキー（F1-F12）レイアウト
-        FUNCTION {
+        // レイヤー5: 未使用
+        layer_5 {
             bindings = <
-&trans                                                                                       &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                  &trans  &kp F12
+// &trans                                                                                       &trans
+// &trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
+// &trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
+// &trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
+// &trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                  &trans  &kp F12
+
+   &trans                                                                                      &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                  &trans  &trans
             >;
 
             sensor-bindings = <
@@ -171,14 +211,54 @@
             >;
         };
 
-        // レイヤー6: Bluetooth接続管理レイアウト
-        BT {
+        // レイヤー6: スクロール操作レイアウト
+        layer_6 {
             bindings = <
-&trans                                                                                                                                      &trans
-&kp LG(Q)      &kp LC(W)  &trans     &trans     &trans  &trans      &trans  &bt BT_PRV  &bt BT_NXT  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&kp LG(LS(Z))  &trans     &kp LC(C)  &trans     &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
-&kp LG(Z)      &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
-&trans         &trans     &trans     &trans     &trans  &trans      &trans  &trans                                &trans        &trans
+// &trans                                                                                                                                      &trans
+// &kp LG(Q)      &kp LC(W)  &trans     &trans     &trans  &trans      &trans  &bt BT_PRV  &bt BT_NXT  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+// &kp LG(LS(Z))  &trans     &kp LC(C)  &trans     &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
+// &kp LG(Z)      &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
+// &trans         &trans     &trans     &trans     &trans  &trans      &trans  &trans                                &trans        &trans
+
+   &trans                                                                                                    &trans
+   &trans     &trans  &trans  &trans  &bootloader &trans        &trans  &bootloader  &trans  &trans  &trans  &trans
+   &kp LCTRL  &trans  &trans  &trans  &trans      &trans        &trans  &trans       &trans  &trans  &trans  &trans
+   &kp LSHIFT &trans  &trans  &trans  &trans      &trans        &trans  &trans       &trans  &trans  &trans  &kp RSHIFT
+   &trans     &trans  &trans  &trans  &trans      &trans        &trans  &trans                       &trans  &trans
+
+
+            >;
+
+            sensor-bindings = <
+                &inc_dec_kp RIGHT_ARROW LEFT_ARROW
+                &scroll_up_down
+            >;
+        };
+
+        // レイヤー7: 未使用
+        layer_7 {
+            bindings = <
+   &trans                                                                                      &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                  &trans  &trans
+            >;
+
+            sensor-bindings = <
+                &inc_dec_kp RIGHT_ARROW LEFT_ARROW
+                &scroll_up_down
+            >;
+        };
+
+        // レイヤー8:
+        layer_8 {
+            bindings = <
+   &trans                                                                                      &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                  &trans  &trans
             >;
 
             sensor-bindings = <
