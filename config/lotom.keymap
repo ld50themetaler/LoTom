@@ -88,7 +88,7 @@
    &mt LGUI QUOT   &kp COMMA     &kp DOT           &kp P           &kp Y        &mkp RCLK                  &mkp RCLK          &kp F            &kp G        &kp C        &kp R         &kp L
    &kp A           &kp O         &mt LCTRL E       &kp U           &kp I        &mkp LCLK                  &mkp LCLK          &kp D            &kp H        &mt RCTRL T  &kp N         &kp S
    &mt LSHIFT SEMI &kp Q         &kp J             &kp K           &kp X        &mkp MCLK                  &mkp MCLK          &kp B            &kp M        &kp W        &kp V         &mt RSHIFT Z
-   &mo 6           &kp LGUI      &kp LALT          &mt LALT BSPC   &mo 2        &mt LSHIFT SPACE           &mt RCTRL ENTER    &mo 3            &mt RALT TAB                            &mo 6
+   &mo 6           &kp LGUI      &kp LALT          &mt LALT BSPC   &mo 2        &mt LSHIFT SPACE           &mt RCTRL ENTER    &mo 3            &mt RALT TAB                            &tog 1
 
             >;
 
@@ -131,10 +131,10 @@
 // &kp F12        &trans  &trans    &trans          &trans  &trans             &trans  &trans                                  &trans      &trans
 
    &trans                                                                                                                                  &trans
-   &kp F1         &kp F2  &kp F3    &kp F4          &kp F5  &trans             &trans  &trans            &kp HOME   &kp PG_DN  &kp PG_UP   &kp END
-   &kp F6         &kp F7  &kp F8    &kp F9          &kp F10 &trans             &trans  &macro_alt_grave  &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT    
-   &mt LSHIFT F11 &kp F12 &kp PSCRN &kp PAUSE_BREAK &kp INS &trans             &trans  &mkp MCLK         &mkp LCLK  &mo 6      &mkp RCLK   &trans
-   &trans         &trans  &trans    &mt LALT DEL    &trans  &trans             &trans  &mo 4                                   &trans      &trans       
+   &kp F1         &kp F2  &kp F3        &kp F4          &kp F5  &trans             &trans  &trans            &kp HOME   &kp PG_DN  &kp PG_UP   &kp END
+   &kp F6         &kp F7  &mt LCTRL F8  &kp F9          &kp F10 &trans             &trans  &macro_alt_grave  &kp LEFT   &kp DOWN   &kp UP      &kp RIGHT    
+   &mt LSHIFT F11 &kp F12 &kp PSCRN     &kp PAUSE_BREAK &kp INS &trans             &trans  &mkp MCLK         &mkp LCLK  &mo 6      &mkp RCLK   &trans
+   &trans         &trans  &trans        &mt LALT DEL    &trans  &trans             &trans  &mo 4                                   &trans      &trans       
 
             >;
 
